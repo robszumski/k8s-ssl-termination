@@ -8,7 +8,7 @@
 https://your.hostname.com {
   log stdout
   errors stderr
-  tls your@email.address
+  tls rob@robszumski.com
   proxy / http://localhost:80 {
     proxy_header Host {host}
   }
