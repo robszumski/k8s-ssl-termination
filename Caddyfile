@@ -1,0 +1,15 @@
+# Permanent redirect to HTTPS
+0.0.0.0:80 {
+  log stdout
+  errors stderr
+  redir https://{$HOSTNAME}{uri} 301
+}
+
+https://your.hostname.com {
+  log stdout
+  errors stderr
+  tls your@email.address
+  proxy / http://localhost:80 {
+    proxy_header Host {host}
+  }
+}
