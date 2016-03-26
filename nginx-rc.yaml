@@ -34,9 +34,6 @@ spec:
           readOnly: true
       - image: quay.io/robszumski/letsencrypt
         name: letsencrypt
-        command:
-          - sleep
-          - "3600"
         env:
         - name: DOMAINS
           value: 'falloutweb.com robszumski.com'
