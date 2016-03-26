@@ -14,3 +14,11 @@ spec:
       containers:
       - image: quay.io/robszumski/k8s-ssl-termination
         name: caddy
+        imagePullPolicy: always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP

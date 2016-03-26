@@ -5,10 +5,16 @@ metadata:
   namespace: default
 spec:
   ports:
-  - nodePort: 32200
-    port: 443
+  - nodePort: 32300
+    port: 80
+    name: http
     protocol: TCP
-    targetPort: 443
+    targetPort: http
+  - nodePort: 32400
+    port: 443
+    name: https
+    protocol: TCP
+    targetPort: https
   selector:
     app: caddy
   sessionAffinity: None
