@@ -15,4 +15,5 @@ RUN ln -s /root/.local/share/letsencrypt/bin/letsencrypt /usr/local/bin/letsencr
 # Add our script and run
 ADD letsencrypt.sh /letsencrypt/
 WORKDIR /letsencrypt
+RUN chmod +x letsencrypt.sh
 ENTRYPOINT ./letsencrypt.sh
