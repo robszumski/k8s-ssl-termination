@@ -1,15 +1,15 @@
 # Permanent redirect to HTTPS
-0.0.0.0:80 {
-  log stdout
-  errors stderr
-  redir https://{$HOSTNAME}{uri} 301
-}
+#0.0.0.0:80 {
+#  log stdout
+#  errors stderr
+#  redir https://{$CADDY_HOSTNAME}{uri} 301
+#}
 
-https://your.hostname.com {
+https://{$CADDY_HOSTNAME} {
   log stdout
   errors stderr
-  tls rob@robszumski.com
-  proxy / http://localhost:80 {
+  tls {$CADDY_EMAIL}
+  proxy / http://{$CADDY_BACKEND} {
     proxy_header Host {host}
   }
 }
