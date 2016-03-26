@@ -26,7 +26,7 @@ spec:
         - mountPath: /etc/nginx/html/
           name: challenges
           readOnly: true
-        - mountPath: /etc/letsencrypt/live
+        - mountPath: /etc/letsencrypt/
           name: certs
           readOnly: true
         - mountPath: /etc/nginx/conf.d/
@@ -50,7 +50,7 @@ spec:
         volumeMounts: 
         - mountPath: /letsencrypt/challenges/
           name: challenges
-        - mountPath: /etc/letsencrypt/live
+        - mountPath: /etc/letsencrypt/
           name: certs
         - mountPath: /letsencrypt/config/
           name: config
