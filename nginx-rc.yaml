@@ -31,8 +31,9 @@ spec:
           readOnly: true
       - image: quay.io/robszumski/letsencrypt
         name: letsencrypt
-        command: 
-          - /bin/sh -c 'sleep 9000;'
+        command:
+          - sleep
+          - "3600"
         env:
         - name: DOMAINS
           value: 'falloutweb.com robszumski.com'
