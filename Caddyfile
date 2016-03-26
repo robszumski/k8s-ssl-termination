@@ -5,11 +5,20 @@
 #  redir https://{$CADDY_HOSTNAME}{uri} 301
 #}
 
-https://{$CADDY_HOSTNAME} {
+https://robszumski.com {
   log stdout
   errors stderr
-  tls {$CADDY_EMAIL}
-  proxy / http://{$CADDY_BACKEND} {
+  tls rob@robszumski.com
+  proxy / http://robszumski.public.svc.cluster.local {
+    proxy_header Host {host}
+  }
+}
+
+https://falloutweb.com {
+  log stdout
+  errors stderr
+  tls rob@robszumski.com
+  proxy / http://falloutweb.public.svc.cluster.local {
     proxy_header Host {host}
   }
 }
