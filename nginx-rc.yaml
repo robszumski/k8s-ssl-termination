@@ -12,7 +12,7 @@ spec:
         app: nginx-tls
     spec:
       containers:
-      - image: quay.io/robszumski/k8s-service-proxy
+      - image: quay.io/robszumski/k8s-ssl-termination
         name: nginx
         imagePullPolicy: Always
         ports:
