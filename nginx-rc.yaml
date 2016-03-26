@@ -23,7 +23,7 @@ spec:
           name: https
           protocol: TCP
         volumeMounts: 
-        - mountPath: /usr/share/nginx/html/.well-known/acme-challenge
+        - mountPath: /etc/nginx/html/
           name: challenges
           readOnly: true
         - mountPath: /etc/letsencrypt/live
