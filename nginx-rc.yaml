@@ -29,6 +29,9 @@ spec:
         - mountPath: /etc/letsencrypt/live
           name: certs
           readOnly: true
+        - mountPath: /etc/nginx/conf.d/
+          name: config
+          readOnly: true
       - image: quay.io/robszumski/letsencrypt
         name: letsencrypt
         command:
@@ -49,10 +52,13 @@ spec:
           name: challenges
         - mountPath: /etc/letsencrypt/live
           name: certs
+        - mountPath: /letsencrypt/config/
+          name: config
       terminationGracePeriodSeconds: 30
       volumes: 
         - emptyDir: {}
           name: challenges
         - emptyDir: {}
           name: certs
-
+        - emptyDir: {}
+          name: config

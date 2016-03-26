@@ -23,8 +23,17 @@ do
    # do whatever on $i
 done
 
-/usr/local/bin/letsencrypt certonly \
-    --webroot -w /letsencrypt/challenges/ \
-    --text --renew-by-default --agree-tos \
-      $domain_args \
-     --email=$EMAIL
+# /usr/local/bin/letsencrypt certonly \
+#     --webroot -w /letsencrypt/challenges/ \
+#     --text --renew-by-default --agree-tos \
+#       $domain_args \
+#      --email=$EMAIL
+
+for domain_full in "${DOMAINS[@]}"
+do
+  domain_short=`echo $domain_full | sed 's/....$//'`
+  echo "/letsencrypt/config/$domain_short.conf"
+  cp backend.conf.template "/letsencrypt/config/$domain_short.conf"
+  sed -i -e "s/%DOMAIN%/$domain_full/g" "/letsencrypt/config/$domain_short.conf"
+  sed -i -e "s/%DOMAIN_SHORT%/$domain_short/g" "/letsencrypt/config/$domain_short.conf"
+done
