@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-router-tls
+spec:
+  replicas: 1
+  selector:
+    app: nginx-tls
+  template:
+    metadata:
+      labels:
+        app: nginx-tls
+    spec:
+      containers:
+      - image: quay.io/robszumski/k8s-service-proxy
+        name: nginx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+        volumeMounts: 
+        - mountPath: /usr/share/nginx/html/.well-known/acme-challenge
+          name: challenges
+          readOnly: true
+        - mountPath: /etc/letsencrypt/live
+          name: certs
+          readOnly: true
+      - image: quay.io/robszumski/letsencrypt
+        name: letsencrypt
+        command: 
+          - /bin/sh -c 'sleep 9000;'
+        env:
+        - name: DOMAINS
+          value: 'falloutweb.com robszumski.com'
+        - name: EMAIL
+          value: 'rob@robszumski.com'
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: challenge
+          protocol: TCP
+        volumeMounts: 
+        - mountPath: /letsencrypt/challenges/
+          name: challenges
+        - mountPath: /etc/letsencrypt/live
+          name: certs
+      terminationGracePeriodSeconds: 30
+      volumes: 
+        - emptyDir: {}
+          name: challenges
+        - emptyDir: {}
+          name: certs
+
